@@ -1,1 +1,20 @@
-<%# Update me %><%= @monster.inspect %>
+<h1><%= @monster.name %></h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <!-- Columna izquierda: Información del monstruo y botón para eliminar -->
+            <%= @monster.description %>
+            <br><br>
+            <%= link_to "Eliminar", monster_path(@monster), method: :delete, class: "btn btn-danger" %>
+        </div>
+        <div class="col-sm-6">
+            <!-- Columna derecha: Listado de tweets del monstruo -->
+            <h2>Tweets de <%= @monster.name %></h2>
+            <ul>
+                <% Tweet.where(monster_id: @monster.id).each do |tweet| %>
+                    <li><%= tweet.content %></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</div>
